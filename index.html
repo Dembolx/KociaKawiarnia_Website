@@ -1,684 +1,1194 @@
 <!DOCTYPE html>
 <html lang="pl">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kocia Kawiarnia - Relaks przy kawie w towarzystwie kotów</title>
-<meta name="description" content="Odwiedź naszą kocią kawiarnię i ciesz się pyszną kawą w towarzystwie przyjaznych kotów. Zarezerwuj stolik online i otrzymaj 10% zniżki!">
-<script src="https://cdn.tailwindcss.com/3.4.16"></script>
-<script>tailwind.config={theme:{extend:{colors:{primary:'#FF6B6B',secondary:'#FF9E80'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700&family=Baloo+2:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kocia Kawiarnia - Relaks przy kawie w towarzystwie kotów</title>
+    <meta
+      name="description"
+      content="Odwiedź naszą kocią kawiarnię i ciesz się pyszną kawą w towarzystwie przyjaznych kotów. Zarezerwuj stolik online i otrzymaj 10% zniżki!"
+    />
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: { primary: "#FF6B6B", secondary: "#FF9E80" },
+            borderRadius: {
+              none: "0px",
+              sm: "4px",
+              DEFAULT: "8px",
+              md: "12px",
+              lg: "16px",
+              xl: "20px",
+              "2xl": "24px",
+              "3xl": "32px",
+              full: "9999px",
+              button: "8px",
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700&family=Baloo+2:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
 
-<script type="application/ld+json">
-{
-"@context": "https://schema.org",
-"@type": "LocalBusiness",
-"name": "Kocia Kawiarnia",
-"image": "https://readdy.ai/api/search-image?query=cozy%2520cat%2520cafe%2520with%2520multiple%2520cats%2520relaxing%2520on%2520furniture%2520while%2520people%2520enjoy%2520coffee%2520and%2520pastries%2520in%2520a%2520warm%2520inviting%2520atmosphere%2520with%2520soft%2520lighting%2520and%2520comfortable%2520seating&width=1200&height=630&seq=123&orientation=landscape",
-"telephone": "+48 123 456 789",
-"address": {
-"@type": "PostalAddress",
-"streetAddress": "ul. Kocia 15",
-"addressLocality": "Warszawa",
-"postalCode": "00-001",
-"addressCountry": "PL"
-},
-"openingHoursSpecification": [
-{
-"@type": "OpeningHoursSpecification",
-"dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-"opens": "10:00",
-"closes": "20:00"
-},
-{
-"@type": "OpeningHoursSpecification",
-"dayOfWeek": ["Saturday", "Sunday"],
-"opens": "11:00",
-"closes": "21:00"
-}
-],
-"menu": "https://kociakawiarnia.pl/menu.pdf",
-"servesCuisine": "Kawa, Desery"
-}
-</script>
-</head>
-<body class="cat-pattern">
-<div class="cat-tail"></div>
-<!-- Header -->
-<header class="bg-white shadow-md sticky top-0 z-50">
-<div class="container mx-auto px-4 py-3 flex items-center justify-between">
-<div class="flex items-center">
-<a href="#" class="font-['Pacifico'] text-3xl text-primary mr-8">Kocia Kawiarnia</a>
-<nav class="hidden md:flex space-x-6">
-<a href="#o-nas" class="font-medium hover:text-primary transition-colors">O nas</a>
-<a href="#koty" class="font-medium hover:text-primary transition-colors">Koty</a>
-<a href="#menu" class="font-medium hover:text-primary transition-colors">Menu</a>
-<a href="#kontakt" class="font-medium hover:text-primary transition-colors">Kontakt</a>
-</nav>
-</div>
-<div class="flex items-center space-x-4">
-<a href="tel:+48123456789" class="text-lg font-bold hidden md:block">+48 123 456 789</a>
-<div class="w-10 h-10 flex items-center justify-center">
-<i class="ri-shopping-cart-2-line ri-lg"></i>
-</div>
-<button class="md:hidden w-10 h-10 flex items-center justify-center" id="mobile-menu-button">
-<i class="ri-menu-line ri-lg"></i>
-</button>
-</div>
-</div>
-<!-- Mobile Menu -->
-<div id="mobile-menu" class="hidden bg-white md:hidden">
-<nav class="container mx-auto px-4 py-3 flex flex-col space-y-4">
-<a href="#o-nas" class="font-medium hover:text-primary transition-colors">O nas</a>
-<a href="#koty" class="font-medium hover:text-primary transition-colors">Koty</a>
-<a href="#menu" class="font-medium hover:text-primary transition-colors">Menu</a>
-<a href="#kontakt" class="font-medium hover:text-primary transition-colors">Kontakt</a>
-<a href="tel:+48123456789" class="text-lg font-bold">+48 123 456 789</a>
-</nav>
-</div>
-</header>
-<!-- Hero Section -->
-<section class="relative h-[600px] w-full overflow-hidden">
-<div style="background-image: url('https://readdy.ai/api/search-image?query=cozy%2520cat%2520cafe%2520interior%2520with%2520multiple%2520cats%2520lounging%2520on%2520furniture%2520while%2520people%2520enjoy%2520coffee.%2520The%2520left%2520side%2520has%2520a%2520clean%2520light%2520beige%2520background%2520that%2520transitions%2520naturally%2520to%2520the%2520cafe%2520scene%2520on%2520the%2520right.%2520The%2520image%2520has%2520warm%2520lighting%2520and%2520a%2520welcoming%2520atmosphere&width=1920&height=1080&seq=1&orientation=landscape'); background-size: cover; background-position: center;" class="absolute inset-0"></div>
-<div class="absolute inset-0 bg-gradient-to-r from-[#F5E9E2] via-[#F5E9E2]/90 to-transparent"></div>
-<div class="container relative mx-auto px-4 h-full flex items-center">
-<div class="w-full md:w-1/2 text-left">
-<h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">Relaks przy kawie w towarzystwie naszych kotów</h1>
-<p class="text-xl mb-8">Rezerwuj wizytę online i odbierz 10% zniżki na pierwszą kawę</p>
-<a href="#rezerwacja" class="bg-primary text-white px-8 py-4 rounded-button text-lg font-bold inline-block shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1 whitespace-nowrap">Zarezerwuj stolik</a>
-</div>
-</div>
-</section>
-<!-- O nas Section -->
-<section id="o-nas" class="py-16 bg-white">
-<div class="container mx-auto px-4">
-<h2 class="text-3xl md:text-4xl font-bold text-center mb-12">O naszej kawiarni</h2>
-<div class="flex flex-col md:flex-row gap-8 items-center">
-<div class="w-full md:w-1/2">
-<img src="https://readdy.ai/api/search-image?query=cozy%2520interior%2520of%2520a%2520cat%2520cafe%2520with%2520comfortable%2520seating%2520wooden%2520furniture%2520and%2520several%2520cats%2520lounging%2520around%2520plants%2520and%2520cat%2520trees%2520warm%2520lighting%2520and%2520a%2520relaxed%2520atmosphere&width=600&height=400&seq=2&orientation=landscape" alt="Wnętrze Kociej Kawiarni" class="rounded-lg shadow-lg w-full h-auto object-cover">
-</div>
-<div class="w-full md:w-1/2">
-<h3 class="text-2xl font-bold mb-4">Miejsce, gdzie koty i ludzie czują się jak w domu</h3>
-<p class="mb-4">Nasza Kocia Kawiarnia to wyjątkowe miejsce, gdzie możesz cieszyć się doskonałą kawą i pysznymi deserami w towarzystwie przyjaznych kotów. Stworzyliśmy przestrzeń, która jest zarówno komfortowa dla naszych mruczących przyjaciół, jak i przytulna dla gości.</p>
-<p class="mb-4">Wszystkie nasze koty pochodzą z lokalnych schronisk lub certyfikowanych hodowli. Niektóre z nich są dostępne do adopcji dla odpowiedzialnych opiekunów.</p>
-<p>Zapewniamy kotom najlepszą opiekę, regularne wizyty u weterynarza i zbilansowaną dietę. Dla naszych gości przygotowujemy kawę z najlepszych ziaren oraz domowe wypieki.</p>
-</div>
-</div>
-</div>
-</section>
-<!-- Koty Section -->
-<section id="koty" class="py-16 bg-[#F5E9E2]">
-<div class="container mx-auto px-4">
-<h2 class="text-3xl md:text-4xl font-bold text-center mb-4">Poznaj nasze koty</h2>
-<p class="text-center mb-12 max-w-2xl mx-auto">Każdy z naszych kocich przyjaciół ma wyjątkową osobowość. Niektóre uwielbiają być w centrum uwagi, inne wolą obserwować z dystansu. Wszystkie czekają, by się z Tobą zaprzyjaźnić!</p>
-<div class="relative">
-<div class="flex overflow-x-auto pb-8 gap-6 snap-x" id="cats-carousel">
-<!-- Kot 1 -->
-<div class="min-w-[280px] max-w-[280px] bg-white rounded-lg shadow-lg overflow-hidden snap-start transition-transform duration-300 menu-item">
-<img src="https://readdy.ai/api/search-image?query=adorable%2520grey%2520british%2520shorthair%2520cat%2520with%2520bright%2520yellow%2520eyes%2520sitting%2520on%2520a%2520cat%2520tree%2520in%2520a%2520cafe%2520setting%2520with%2520soft%2520natural%2520lighting%2520and%2520a%2520clean%2520background&width=300&height=300&seq=3&orientation=squarish" alt="Kot Mruczek w kawiarni" class="w-full h-48 object-cover object-top">
-<div class="p-4">
-<div class="flex justify-between items-center mb-2">
-<h3 class="text-xl font-bold">Mruczek</h3>
-<span class="text-sm">2 lata</span>
-</div>
-<p class="text-sm mb-3">Przyjazny brytyjczyk, uwielbia drapanie za uchem i wylegiwanie się na parapetach.</p>
-<div class="flex justify-between items-center">
-<span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Do adopcji</span>
-<button class="text-primary hover:text-secondary">
-<i class="ri-heart-line ri-lg"></i>
-</button>
-</div>
-</div>
-</div>
-<!-- Kot 2 -->
-<div class="min-w-[280px] max-w-[280px] bg-white rounded-lg shadow-lg overflow-hidden snap-start transition-transform duration-300 menu-item">
-<img src="https://readdy.ai/api/search-image?query=beautiful%2520orange%2520tabby%2520cat%2520lounging%2520on%2520a%2520cushion%2520in%2520a%2520cafe%2520setting%2520with%2520soft%2520natural%2520lighting%2520and%2520a%2520clean%2520background%2520the%2520cat%2520has%2520green%2520eyes%2520and%2520looks%2520relaxed&width=300&height=300&seq=4&orientation=squarish" alt="Kot Rudzik w kawiarni" class="w-full h-48 object-cover object-top">
-<div class="p-4">
-<div class="flex justify-between items-center mb-2">
-<h3 class="text-xl font-bold">Rudzik</h3>
-<span class="text-sm">3 lata</span>
-</div>
-<p class="text-sm mb-3">Energiczny rudy kot, który uwielbia zabawę i jest bardzo towarzyski. Zawsze pierwszy wita gości.</p>
-<div class="flex justify-between items-center">
-<span class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Rezydent</span>
-<button class="text-primary hover:text-secondary">
-<i class="ri-heart-line ri-lg"></i>
-</button>
-</div>
-</div>
-</div>
-<!-- Kot 3 -->
-<div class="min-w-[280px] max-w-[280px] bg-white rounded-lg shadow-lg overflow-hidden snap-start transition-transform duration-300 menu-item">
-<img src="https://readdy.ai/api/search-image?query=elegant%2520black%2520cat%2520with%2520yellow%2520eyes%2520sitting%2520on%2520a%2520window%2520sill%2520in%2520a%2520cafe%2520setting%2520with%2520soft%2520natural%2520lighting%2520and%2520a%2520clean%2520background%2520the%2520cat%2520looks%2520mysterious%2520and%2520regal&width=300&height=300&seq=5&orientation=squarish" alt="Kot Luna w kawiarni" class="w-full h-48 object-cover object-top">
-<div class="p-4">
-<div class="flex justify-between items-center mb-2">
-<h3 class="text-xl font-bold">Luna</h3>
-<span class="text-sm">4 lata</span>
-</div>
-<p class="text-sm mb-3">Tajemnicza czarna kotka, która uwielbia obserwować gości z wysokości. Lubi spokój i ciszę.</p>
-<div class="flex justify-between items-center">
-<span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Do adopcji</span>
-<button class="text-primary hover:text-secondary">
-<i class="ri-heart-line ri-lg"></i>
-</button>
-</div>
-</div>
-</div>
-<!-- Kot 4 -->
-<div class="min-w-[280px] max-w-[280px] bg-white rounded-lg shadow-lg overflow-hidden snap-start transition-transform duration-300 menu-item">
-<img src="https://readdy.ai/api/search-image?query=fluffy%2520ragdoll%2520cat%2520with%2520blue%2520eyes%2520lounging%2520on%2520a%2520cat%2520bed%2520in%2520a%2520cafe%2520setting%2520with%2520soft%2520natural%2520lighting%2520and%2520a%2520clean%2520background%2520the%2520cat%2520looks%2520relaxed%2520and%2520friendly&width=300&height=300&seq=6&orientation=squarish" alt="Kot Puszek w kawiarni" class="w-full h-48 object-cover object-top">
-<div class="p-4">
-<div class="flex justify-between items-center mb-2">
-<h3 class="text-xl font-bold">Puszek</h3>
-<span class="text-sm">1 rok</span>
-</div>
-<p class="text-sm mb-3">Puchaty ragdoll, który uwielbia być noszony na rękach. Bardzo przyjazny i cierpliwy.</p>
-<div class="flex justify-between items-center">
-<span class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Rezydent</span>
-<button class="text-primary hover:text-secondary">
-<i class="ri-heart-line ri-lg"></i>
-</button>
-</div>
-</div>
-</div>
-<!-- Kot 5 -->
-<div class="min-w-[280px] max-w-[280px] bg-white rounded-lg shadow-lg overflow-hidden snap-start transition-transform duration-300 menu-item">
-<img src="https://readdy.ai/api/search-image?query=calico%2520cat%2520with%2520orange%2520black%2520and%2520white%2520patches%2520playing%2520with%2520a%2520toy%2520in%2520a%2520cafe%2520setting%2520with%2520soft%2520natural%2520lighting%2520and%2520a%2520clean%2520background%2520the%2520cat%2520looks%2520playful%2520and%2520energetic&width=300&height=300&seq=7&orientation=squarish" alt="Kot Łatka w kawiarni" class="w-full h-48 object-cover object-top">
-<div class="p-4">
-<div class="flex justify-between items-center mb-2">
-<h3 class="text-xl font-bold">Łatka</h3>
-<span class="text-sm">2 lata</span>
-</div>
-<p class="text-sm mb-3">Energiczna kotka tricolor, która uwielbia zabawki i gonienie piłeczek. Zawsze w ruchu!</p>
-<div class="flex justify-between items-center">
-<span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Do adopcji</span>
-<button class="text-primary hover:text-secondary">
-<i class="ri-heart-line ri-lg"></i>
-</button>
-</div>
-</div>
-</div>
-</div>
-<!-- Navigation Buttons -->
-<button class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white rounded-full shadow-lg p-2 -ml-4 hidden md:block" id="prev-cat">
-<i class="ri-arrow-left-s-line ri-lg"></i>
-</button>
-<button class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white rounded-full shadow-lg p-2 -mr-4 hidden md:block" id="next-cat">
-<i class="ri-arrow-right-s-line ri-lg"></i>
-</button>
-</div>
-<div class="text-center mt-8">
-<a href="#wszystkie-koty" class="inline-block bg-white text-primary border border-primary px-6 py-3 rounded-button font-bold hover:bg-primary hover:text-white transition-colors whitespace-nowrap">Poznaj wszystkie koty</a>
-</div>
-</div>
-</section>
-<!-- Menu Section -->
-<section id="menu" class="py-16 bg-white">
-<div class="container mx-auto px-4">
-<h2 class="text-3xl md:text-4xl font-bold text-center mb-4">Nasze menu</h2>
-<p class="text-center mb-8 max-w-2xl mx-auto">Oferujemy szeroki wybór kaw, herbat i domowych wypieków. Wszystkie nasze produkty przygotowujemy z najwyższej jakości składników.</p>
-<!-- Search Bar -->
-<div class="max-w-md mx-auto mb-8">
-<div class="relative">
-<div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-<i class="ri-search-line ri-lg text-gray-400"></i>
-</div>
-<input type="text" id="menu-search" class="w-full p-4 pl-10 text-sm border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary" placeholder="Szukaj w menu...">
-</div>
-</div>
-<!-- Menu Tabs -->
-<div class="flex justify-center mb-8">
-<div class="inline-flex p-1 rounded-full bg-gray-100">
-<button class="tab-button active px-6 py-2 rounded-full text-sm font-medium whitespace-nowrap" data-tab="napoje">Napoje</button>
-<button class="tab-button px-6 py-2 rounded-full text-sm font-medium whitespace-nowrap" data-tab="desery">Desery</button>
-<button class="tab-button px-6 py-2 rounded-full text-sm font-medium whitespace-nowrap" data-tab="promocje">Promocje</button>
-</div>
-</div>
-<!-- Menu Content -->
-<div class="tab-content" id="napoje">
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-<!-- Menu Item 1 -->
-<div class="bg-white rounded-lg shadow p-6 transition-transform duration-300 menu-item">
-<div class="flex justify-between items-start mb-3">
-<h3 class="text-xl font-bold">Kocie Latte</h3>
-<span class="text-lg font-bold text-primary">15 zł</span>
-</div>
-<p class="text-sm mb-3">Espresso, spienione mleko, syrop waniliowy, posypka w kształcie kota</p>
-<div class="flex space-x-2">
-<span class="bg-gray-100 text-xs px-2 py-1 rounded-full">Mleko</span>
-<span class="bg-gray-100 text-xs px-2 py-1 rounded-full">Gluten</span>
-</div>
-</div>
-<!-- Menu Item 2 -->
-<div class="bg-white rounded-lg shadow p-6 transition-transform duration-300 menu-item">
-<div class="flex justify-between items-start mb-3">
-<h3 class="text-xl font-bold">Cappuccino Mruczka</h3>
-<span class="text-lg font-bold text-primary">14 zł</span>
-</div>
-<p class="text-sm mb-3">Podwójne espresso, aksamitna pianka mleczna, cynamon</p>
-<div class="flex space-x-2">
-<span class="bg-gray-100 text-xs px-2 py-1 rounded-full">Mleko</span>
-</div>
-</div>
-<!-- Menu Item 3 -->
-<div class="bg-white rounded-lg shadow p-6 transition-transform duration-300 menu-item">
-<div class="flex justify-between items-start mb-3">
-<h3 class="text-xl font-bold">Herbata Kocimiętka</h3>
-<span class="text-lg font-bold text-primary">12 zł</span>
-</div>
-<p class="text-sm mb-3">Aromatyczna herbata ziołowa z dodatkiem miodu i cytryny</p>
-<div class="flex space-x-2">
-<span class="bg-gray-100 text-xs px-2 py-1 rounded-full">Miód</span>
-</div>
-</div>
-<!-- Menu Item 4 -->
-<div class="bg-white rounded-lg shadow p-6 transition-transform duration-300 menu-item">
-<div class="flex justify-between items-start mb-3">
-<h3 class="text-xl font-bold">Mrożona Kawa Perska</h3>
-<span class="text-lg font-bold text-primary">16 zł</span>
-</div>
-<p class="text-sm mb-3">Kawa cold brew, mleko, syrop karmelowy, lód</p>
-<div class="flex space-x-2">
-<span class="bg-gray-100 text-xs px-2 py-1 rounded-full">Mleko</span>
-</div>
-</div>
-<!-- Menu Item 5 -->
-<div class="bg-white rounded-lg shadow p-6 transition-transform duration-300 menu-item">
-<div class="flex justify-between items-start mb-3">
-<h3 class="text-xl font-bold">Gorąca Czekolada Puszka</h3>
-<span class="text-lg font-bold text-primary">18 zł</span>
-</div>
-<p class="text-sm mb-3">Gęsta belgijska czekolada, bita śmietana, posypka czekoladowa</p>
-<div class="flex space-x-2">
-<span class="bg-gray-100 text-xs px-2 py-1 rounded-full">Mleko</span>
-<span class="bg-gray-100 text-xs px-2 py-1 rounded-full">Śmietana</span>
-</div>
-</div>
-<!-- Menu Item 6 -->
-<div class="bg-white rounded-lg shadow p-6 transition-transform duration-300 menu-item">
-<div class="flex justify-between items-start mb-3">
-<h3 class="text-xl font-bold">Matcha Łapka</h3>
-<span class="text-lg font-bold text-primary">17 zł</span>
-</div>
-<p class="text-sm mb-3">Ceremonialnej jakości matcha, spienione mleko, miód</p>
-<div class="flex space-x-2">
-<span class="bg-gray-100 text-xs px-2 py-1 rounded-full">Mleko</span>
-<span class="bg-gray-100 text-xs px-2 py-1 rounded-full">Miód</span>
-</div>
-</div>
-</div>
-</div>
-<div class="tab-content hidden" id="desery">
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-<!-- Deser 1 -->
-<div class="bg-white rounded-lg shadow p-6 transition-transform duration-300 menu-item">
-<div class="flex justify-between items-start mb-3">
-<h3 class="text-xl font-bold">Sernik Koci Pyszczek</h3>
-<span class="text-lg font-bold text-primary">18 zł</span>
-</div>
-<p class="text-sm mb-3">Kremowy sernik na kruchym spodzie z polewą malinową</p>
-<div class="flex space-x-2">
-<span class="bg-gray-100 text-xs px-2 py-1 rounded-full">Gluten</span>
-<span class="bg-gray-100 text-xs px-2 py-1 rounded-full">Nabiał</span>
-<span class="bg-gray-100 text-xs px-2 py-1 rounded-full">Jaja</span>
-</div>
-</div>
-<!-- Deser 2 -->
-<div class="bg-white rounded-lg shadow p-6 transition-transform duration-300 menu-item">
-<div class="flex justify-between items-start mb-3">
-<h3 class="text-xl font-bold">Muffin Kociego Pazurka</h3>
-<span class="text-lg font-bold text-primary">12 zł</span>
-</div>
-<p class="text-sm mb-3">Czekoladowy muffin z nadzieniem karmelowym i posypką orzechową</p>
-<div class="flex space-x-2">
-<span class="bg-gray-100 text-xs px-2 py-1 rounded-full">Gluten</span>
-<span class="bg-gray-100 text-xs px-2 py-1 rounded-full">Jaja</span>
-<span class="bg-gray-100 text-xs px-2 py-1 rounded-full">Orzechy</span>
-</div>
-</div>
-<!-- Deser 3 -->
-<div class="bg-white rounded-lg shadow p-6 transition-transform duration-300 menu-item">
-<div class="flex justify-between items-start mb-3">
-<h3 class="text-xl font-bold">Tiramisu Mruczka</h3>
-<span class="text-lg font-bold text-primary">16 zł</span>
-</div>
-<p class="text-sm mb-3">Klasyczne włoskie tiramisu z dodatkiem kawy espresso i kakao</p>
-<div class="flex space-x-2">
-<span class="bg-gray-100 text-xs px-2 py-1 rounded-full">Gluten</span>
-<span class="bg-gray-100 text-xs px-2 py-1 rounded-full">Nabiał</span>
-<span class="bg-gray-100 text-xs px-2 py-1 rounded-full">Jaja</span>
-<span class="bg-gray-100 text-xs px-2 py-1 rounded-full">Alkohol</span>
-</div>
-</div>
-<!-- Deser 4 -->
-<div class="bg-white rounded-lg shadow p-6 transition-transform duration-300 menu-item">
-<div class="flex justify-between items-start mb-3">
-<h3 class="text-xl font-bold">Ciasteczka Kocie Łapki</h3>
-<span class="text-lg font-bold text-primary">10 zł</span>
-</div>
-<p class="text-sm mb-3">Kruche ciasteczka w kształcie kocich łapek z czekoladą</p>
-<div class="flex space-x-2">
-<span class="bg-gray-100 text-xs px-2 py-1 rounded-full">Gluten</span>
-<span class="bg-gray-100 text-xs px-2 py-1 rounded-full">Jaja</span>
-</div>
-</div>
-<!-- Deser 5 -->
-<div class="bg-white rounded-lg shadow p-6 transition-transform duration-300 menu-item">
-<div class="flex justify-between items-start mb-3">
-<h3 class="text-xl font-bold">Tarta Kocia Uczta</h3>
-<span class="text-lg font-bold text-primary">15 zł</span>
-</div>
-<p class="text-sm mb-3">Tarta z owocami sezonowymi na kruchym spodzie</p>
-<div class="flex space-x-2">
-<span class="bg-gray-100 text-xs px-2 py-1 rounded-full">Gluten</span>
-<span class="bg-gray-100 text-xs px-2 py-1 rounded-full">Nabiał</span>
-<span class="bg-gray-100 text-xs px-2 py-1 rounded-full">Jaja</span>
-</div>
-</div>
-<!-- Deser 6 -->
-<div class="bg-white rounded-lg shadow p-6 transition-transform duration-300 menu-item">
-<div class="flex justify-between items-start mb-3">
-<h3 class="text-xl font-bold">Lody Kociego Mruczenia</h3>
-<span class="text-lg font-bold text-primary">14 zł</span>
-</div>
-<p class="text-sm mb-3">Domowe lody waniliowe z sosem karmelowym i prażonymi orzechami</p>
-<div class="flex space-x-2">
-<span class="bg-gray-100 text-xs px-2 py-1 rounded-full">Nabiał</span>
-<span class="bg-gray-100 text-xs px-2 py-1 rounded-full">Jaja</span>
-<span class="bg-gray-100 text-xs px-2 py-1 rounded-full">Orzechy</span>
-</div>
-</div>
-</div>
-</div>
-<div class="tab-content hidden" id="promocje">
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-<!-- Promocja 1 -->
-<div class="bg-white rounded-lg shadow p-6 transition-transform duration-300 menu-item border-2 border-primary">
-<div class="flex justify-between items-start mb-3">
-<h3 class="text-xl font-bold">Zestaw Koci Mruczek</h3>
-<div>
-<span class="line-through text-gray-400">35 zł</span>
-<span class="text-lg font-bold text-primary ml-2">28 zł</span>
-</div>
-</div>
-<p class="text-sm mb-3">Dowolna kawa + sernik lub muffin. Oszczędzasz 20%!</p>
-<div class="flex space-x-2">
-<span class="bg-primary bg-opacity-10 text-primary text-xs px-2 py-1 rounded-full">Promocja</span>
-</div>
-</div>
-<!-- Promocja 2 -->
-<div class="bg-white rounded-lg shadow p-6 transition-transform duration-300 menu-item border-2 border-primary">
-<div class="flex justify-between items-start mb-3">
-<h3 class="text-xl font-bold">Happy Hours Kocie Łapki</h3>
-<span class="text-lg font-bold text-primary">-30%</span>
-</div>
-<p class="text-sm mb-3">Wszystkie kawy 30% taniej od poniedziałku do piątku między 14:00 a 16:00</p>
-<div class="flex space-x-2">
-<span class="bg-primary bg-opacity-10 text-primary text-xs px-2 py-1 rounded-full">Promocja</span>
-</div>
-</div>
-<!-- Promocja 3 -->
-<div class="bg-white rounded-lg shadow p-6 transition-transform duration-300 menu-item border-2 border-primary">
-<div class="flex justify-between items-start mb-3">
-<h3 class="text-xl font-bold">Kocia Niedziela</h3>
-<span class="text-lg font-bold text-primary">2+1</span>
-</div>
-<p class="text-sm mb-3">W każdą niedzielę przy zamówieniu dwóch deserów, trzeci otrzymasz gratis!</p>
-<div class="flex space-x-2">
-<span class="bg-primary bg-opacity-10 text-primary text-xs px-2 py-1 rounded-full">Promocja</span>
-</div>
-</div>
-</div>
-</div>
-<div class="text-center mt-10">
-<a href="#pobierz-menu" class="inline-block bg-white text-primary border border-primary px-6 py-3 rounded-button font-bold hover:bg-primary hover:text-white transition-colors whitespace-nowrap">
-<i class="ri-download-line mr-2"></i>Pobierz pełne menu (PDF)
-</a>
-</div>
-</div>
-</section>
-<!-- Why Us Section -->
-<section class="py-16 bg-[#F5E9E2]">
-<div class="container mx-auto px-4">
-<h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Dlaczego warto nas odwiedzić?</h2>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-<!-- Feature 1 -->
-<div class="bg-white rounded-lg shadow-lg p-6 text-center">
-<div class="w-16 h-16 flex items-center justify-center mx-auto mb-4 bg-primary bg-opacity-10 rounded-full">
-<i class="ri-cup-line ri-2x text-primary"></i>
-</div>
-<h3 class="text-xl font-bold mb-3">Kawy z najlepszych ziaren</h3>
-<p>Nasze kawy przygotowujemy z najwyższej jakości ziaren, które sprowadzamy od sprawdzonych dostawców. Każdy łyk to prawdziwa przyjemność.</p>
-</div>
-<!-- Feature 2 -->
-<div class="bg-white rounded-lg shadow-lg p-6 text-center">
-<div class="w-16 h-16 flex items-center justify-center mx-auto mb-4 bg-primary bg-opacity-10 rounded-full">
-<i class="ri-heart-line ri-2x text-primary"></i>
-</div>
-<h3 class="text-xl font-bold mb-3">Koty z certyfikowanej hodowli</h3>
-<p>Wszystkie nasze koty pochodzą z certyfikowanych hodowli lub schronisk. Zapewniamy im najlepszą opiekę i regularne wizyty u weterynarza.</p>
-</div>
-<!-- Feature 3 -->
-<div class="bg-white rounded-lg shadow-lg p-6 text-center">
-<div class="w-16 h-16 flex items-center justify-center mx-auto mb-4 bg-primary bg-opacity-10 rounded-full">
-<i class="ri-wifi-line ri-2x text-primary"></i>
-</div>
-<h3 class="text-xl font-bold mb-3">Bezpłatne WiFi</h3>
-<p>Dla naszych gości oferujemy szybkie i bezpłatne WiFi. Możesz pracować, uczyć się lub po prostu przeglądać internet w towarzystwie kotów.</p>
-</div>
-</div>
-</div>
-</section>
-<!-- Location Section -->
-<section id="kontakt" class="py-16 bg-white">
-<div class="container mx-auto px-4">
-<h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Gdzie nas znaleźć</h2>
-<div class="flex flex-col md:flex-row gap-8">
-<div class="w-full md:w-1/3">
-<div class="bg-[#F5E9E2] rounded-lg shadow-lg p-6">
-<h3 class="text-xl font-bold mb-4">Adres i godziny otwarcia</h3>
-<div class="mb-4">
-<p class="font-bold">Kocia Kawiarnia</p>
-<p>ul. Kocia 15</p>
-<p>00-001 Warszawa</p>
-<a href="tel:+48123456789" class="text-primary hover:underline">+48 123 456 789</a>
-</div>
-<div class="mb-4">
-<p class="font-bold mb-2">Godziny otwarcia:</p>
-<div class="flex justify-between">
-<p>Poniedziałek - Piątek</p>
-<p>10:00 - 20:00</p>
-</div>
-<div class="flex justify-between">
-<p>Sobota - Niedziela</p>
-<p>11:00 - 21:00</p>
-</div>
-</div>
-<div>
-<p class="font-bold mb-2">Informacje o parkingu:</p>
-<p>Bezpłatny parking dla gości znajduje się za budynkiem. Wjazd od ul. Mysiej.</p>
-</div>
-</div>
-<div class="mt-8">
-<h3 class="text-xl font-bold mb-4">Opinie naszych gości</h3>
-<div class="bg-[#F5E9E2] rounded-lg shadow-lg p-6 mb-4">
-<div class="flex items-center mb-2">
-<div class="flex text-yellow-400">
-<i class="ri-star-fill"></i>
-<i class="ri-star-fill"></i>
-<i class="ri-star-fill"></i>
-<i class="ri-star-fill"></i>
-<i class="ri-star-fill"></i>
-</div>
-<span class="ml-2 font-bold">Aleksandra Nowak</span>
-</div>
-<p class="text-sm">Cudowne miejsce! Kawa pyszna, koty przesympatyczne, a obsługa bardzo miła. Idealne miejsce na relaks po pracy.</p>
-</div>
-<div class="bg-[#F5E9E2] rounded-lg shadow-lg p-6 mb-4">
-<div class="flex items-center mb-2">
-<div class="flex text-yellow-400">
-<i class="ri-star-fill"></i>
-<i class="ri-star-fill"></i>
-<i class="ri-star-fill"></i>
-<i class="ri-star-fill"></i>
-<i class="ri-star-half-fill"></i>
-</div>
-<span class="ml-2 font-bold">Piotr Kowalski</span>
-</div>
-<p class="text-sm">Sernik jest absolutnie niebiański! A koty to prawdziwe gwiazdy tego miejsca. Polecam każdemu miłośnikowi kotów.</p>
-</div>
-<div class="bg-[#F5E9E2] rounded-lg shadow-lg p-6">
-<div class="flex items-center mb-2">
-<div class="flex text-yellow-400">
-<i class="ri-star-fill"></i>
-<i class="ri-star-fill"></i>
-<i class="ri-star-fill"></i>
-<i class="ri-star-fill"></i>
-<i class="ri-star-fill"></i>
-</div>
-<span class="ml-2 font-bold">Magdalena Wiśniewska</span>
-</div>
-<p class="text-sm">Przytulne miejsce z niesamowitą atmosferą. Koty są zadbane i przyjazne. Cappuccino Mruczka to mój nowy ulubieniec!</p>
-</div>
-<div class="text-center mt-4">
-<a href="#dodaj-opinie" class="inline-block bg-white text-primary border border-primary px-6 py-3 rounded-button font-bold hover:bg-primary hover:text-white transition-colors whitespace-nowrap">
-<i class="ri-edit-line mr-2"></i>Dodaj opinię
-</a>
-</div>
-</div>
-</div>
-<div class="w-full md:w-2/3 h-[600px] rounded-lg overflow-hidden shadow-lg">
-<div style="background-image: url('https://public.readdy.ai/gen_page/map_placeholder_1280x720.png'); background-size: cover; background-position: center;" class="w-full h-full"></div>
-</div>
-</div>
-</div>
-</section>
-<!-- Reservation Section -->
-<section id="rezerwacja" class="py-16 bg-primary bg-opacity-10">
-<div class="container mx-auto px-4">
-<h2 class="text-3xl md:text-4xl font-bold text-center mb-4">Zarezerwuj stolik</h2>
-<p class="text-center mb-12 max-w-2xl mx-auto">Zarezerwuj stolik online i otrzymaj 10% zniżki na pierwszą kawę. Rezerwacja jest ważna przez 15 minut od wybranej godziny.</p>
-<div class="max-w-2xl mx-auto bg-white rounded-lg shadow-lg p-8">
-<form>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-<div>
-<label for="name" class="block mb-2 font-medium">Imię i nazwisko</label>
-<input type="text" id="name" class="w-full p-3 border border-gray-200 rounded focus:ring-2 focus:ring-primary focus:border-primary" required>
-</div>
-<div>
-<label for="email" class="block mb-2 font-medium">Email</label>
-<input type="email" id="email" class="w-full p-3 border border-gray-200 rounded focus:ring-2 focus:ring-primary focus:border-primary" required>
-</div>
-<div>
-<label for="phone" class="block mb-2 font-medium">Telefon</label>
-<input type="tel" id="phone" class="w-full p-3 border border-gray-200 rounded focus:ring-2 focus:ring-primary focus:border-primary" required>
-</div>
-<div>
-<label for="guests" class="block mb-2 font-medium">Liczba osób</label>
-<input type="number" id="guests" min="1" max="10" class="w-full p-3 border border-gray-200 rounded focus:ring-2 focus:ring-primary focus:border-primary" required>
-</div>
-<div>
-<label for="date" class="block mb-2 font-medium">Data</label>
-<input type="date" id="date" class="w-full p-3 border border-gray-200 rounded focus:ring-2 focus:ring-primary focus:border-primary" required>
-</div>
-<div>
-<label for="time" class="block mb-2 font-medium">Godzina</label>
-<input type="time" id="time" class="w-full p-3 border border-gray-200 rounded focus:ring-2 focus:ring-primary focus:border-primary" required>
-</div>
-</div>
-<div class="mb-6">
-<label for="message" class="block mb-2 font-medium">Dodatkowe informacje</label>
-<textarea id="message" rows="4" class="w-full p-3 border border-gray-200 rounded focus:ring-2 focus:ring-primary focus:border-primary"></textarea>
-</div>
-<div class="mb-6">
-<label class="flex items-center">
-<input type="checkbox" class="mr-2" required>
-<span class="text-sm">Akceptuję <a href="#regulamin" class="text-primary hover:underline">regulamin</a> i wyrażam zgodę na przetwarzanie moich danych osobowych</span>
-</label>
-</div>
-<div class="text-center">
-<button type="submit" class="bg-primary text-white px-8 py-4 rounded-button text-lg font-bold shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1 whitespace-nowrap">Zarezerwuj stolik</button>
-</div>
-</form>
-</div>
-</div>
-</section>
-<!-- Newsletter Section -->
-<section class="py-16 bg-white">
-<div class="container mx-auto px-4">
-<div class="max-w-3xl mx-auto text-center">
-<h2 class="text-3xl md:text-4xl font-bold mb-4">Dołącz do naszego newslettera</h2>
-<p class="mb-8">Zapisz się, aby otrzymywać informacje o promocjach, nowych kotach i wydarzeniach w naszej kawiarni.</p>
-<div class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-<input type="email" placeholder="Twój adres email" class="flex-grow p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary">
-<button class="bg-primary text-white px-6 py-3 rounded-button font-bold shadow-lg hover:shadow-xl transition-all whitespace-nowrap">Zapisz się</button>
-</div>
-</div>
-</div>
-</section>
-<!-- Footer -->
-<footer class="bg-[#6D6875] text-white py-12">
-<div class="container mx-auto px-4">
-<div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-<div>
-<a href="#" class="font-['Pacifico'] text-3xl text-white mb-4 inline-block">Kocia Kawiarnia</a>
-<p class="mb-4">Miejsce, gdzie koty i ludzie czują się jak w domu.</p>
-<div class="flex space-x-4">
-<a href="#" class="w-10 h-10 flex items-center justify-center bg-white bg-opacity-20 rounded-full hover:bg-opacity-30 transition-colors">
-<i class="ri-facebook-fill ri-lg"></i>
-</a>
-<a href="#" class="w-10 h-10 flex items-center justify-center bg-white bg-opacity-20 rounded-full hover:bg-opacity-30 transition-colors">
-<i class="ri-instagram-line ri-lg"></i>
-</a>
-<a href="#" class="w-10 h-10 flex items-center justify-center bg-white bg-opacity-20 rounded-full hover:bg-opacity-30 transition-colors">
-<i class="ri-twitter-x-line ri-lg"></i>
-</a>
-</div>
-</div>
-<div>
-<h3 class="text-xl font-bold mb-4">Kontakt</h3>
-<p class="mb-2">ul. Kocia 15</p>
-<p class="mb-2">00-001 Warszawa</p>
-<p class="mb-2"><a href="tel:+48123456789" class="hover:underline">+48 123 456 789</a></p>
-<p><a href="mailto:kontakt@kociakawiarnia.pl" class="hover:underline">kontakt@kociakawiarnia.pl</a></p>
-</div>
-<div>
-<h3 class="text-xl font-bold mb-4">Godziny otwarcia</h3>
-<p class="mb-2">Poniedziałek - Piątek: 10:00 - 20:00</p>
-<p>Sobota - Niedziela: 11:00 - 21:00</p>
-</div>
-<div>
-<h3 class="text-xl font-bold mb-4">Szybkie linki</h3>
-<ul class="space-y-2">
-<li><a href="#o-nas" class="hover:underline">O nas</a></li>
-<li><a href="#koty" class="hover:underline">Koty</a></li>
-<li><a href="#menu" class="hover:underline">Menu</a></li>
-<li><a href="#rezerwacja" class="hover:underline">Rezerwacja</a></li>
-<li><a href="#kontakt" class="hover:underline">Kontakt</a></li>
-</ul>
-</div>
-</div>
-<div class="border-t border-white border-opacity-20 mt-8 pt-8">
-<div class="flex flex-col md:flex-row justify-between items-center">
-<p>&copy; 2025 Kocia Kawiarnia. Wszelkie prawa zastrzeżone.</p>
-<div class="flex space-x-4 mt-4 md:mt-0">
-<a href="#polityka-prywatnosci" class="hover:underline">Polityka prywatności</a>
-<a href="#regulamin" class="hover:underline">Regulamin</a>
-<a href="#cookies" class="hover:underline">Cookies</a>
-</div>
-</div>
-</div>
-</div>
-</footer>
-<!-- Floating CTA for Mobile -->
-<div class="fixed bottom-4 right-4 md:hidden z-50">
-<a href="#rezerwacja" class="bg-primary text-white p-4 rounded-full shadow-lg flex items-center justify-center">
-<i class="ri-calendar-check-line ri-lg"></i>
-</a>
-</div>
-</body>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Kocia Kawiarnia",
+        "image": "https://readdy.ai/api/search-image?query=cozy%2520cat%2520cafe%2520with%2520multiple%2520cats%2520relaxing%2520on%2520furniture%2520while%2520people%2520enjoy%2520coffee%2520and%2520pastries%2520in%2520a%2520warm%2520inviting%2520atmosphere%2520with%2520soft%2520lighting%2520and%2520comfortable%2520seating&width=1200&height=630&seq=123&orientation=landscape",
+        "telephone": "+48 123 456 789",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "ul. Kocia 15",
+          "addressLocality": "Warszawa",
+          "postalCode": "00-001",
+          "addressCountry": "PL"
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "opens": "10:00",
+            "closes": "20:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Saturday", "Sunday"],
+            "opens": "11:00",
+            "closes": "21:00"
+          }
+        ],
+        "menu": "https://kociakawiarnia.pl/menu.pdf",
+        "servesCuisine": "Kawa, Desery"
+      }
+    </script>
+  </head>
+  <body class="cat-pattern">
+    <div class="cat-tail"></div>
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+      <div
+        class="container mx-auto px-4 py-3 flex items-center justify-between"
+      >
+        <div class="flex items-center">
+          <a href="#" class="font-['Pacifico'] text-3xl text-primary mr-8"
+            >Kocia Kawiarnia</a
+          >
+          <nav class="hidden md:flex space-x-6">
+            <a
+              href="#o-nas"
+              class="font-medium hover:text-primary transition-colors"
+              >O nas</a
+            >
+            <a
+              href="#koty"
+              class="font-medium hover:text-primary transition-colors"
+              >Koty</a
+            >
+            <a
+              href="#menu"
+              class="font-medium hover:text-primary transition-colors"
+              >Menu</a
+            >
+            <a
+              href="#kontakt"
+              class="font-medium hover:text-primary transition-colors"
+              >Kontakt</a
+            >
+          </nav>
+        </div>
+        <div class="flex items-center space-x-4">
+          <a href="tel:+48123456789" class="text-lg font-bold hidden md:block"
+            >+48 123 456 789</a
+          >
+          <div class="w-10 h-10 flex items-center justify-center">
+            <i class="ri-shopping-cart-2-line ri-lg"></i>
+          </div>
+          <button
+            class="md:hidden w-10 h-10 flex items-center justify-center"
+            id="mobile-menu-button"
+          >
+            <i class="ri-menu-line ri-lg"></i>
+          </button>
+        </div>
+      </div>
+      <!-- Mobile Menu -->
+      <div id="mobile-menu" class="hidden bg-white md:hidden">
+        <nav class="container mx-auto px-4 py-3 flex flex-col space-y-4">
+          <a
+            href="#o-nas"
+            class="font-medium hover:text-primary transition-colors"
+            >O nas</a
+          >
+          <a
+            href="#koty"
+            class="font-medium hover:text-primary transition-colors"
+            >Koty</a
+          >
+          <a
+            href="#menu"
+            class="font-medium hover:text-primary transition-colors"
+            >Menu</a
+          >
+          <a
+            href="#kontakt"
+            class="font-medium hover:text-primary transition-colors"
+            >Kontakt</a
+          >
+          <a href="tel:+48123456789" class="text-lg font-bold"
+            >+48 123 456 789</a
+          >
+        </nav>
+      </div>
+    </header>
+    <!-- Hero Section -->
+    <section class="relative h-[600px] w-full overflow-hidden">
+      <div
+        style="
+          background-image: url('https://readdy.ai/api/search-image?query=cozy%2520cat%2520cafe%2520interior%2520with%2520multiple%2520cats%2520lounging%2520on%2520furniture%2520while%2520people%2520enjoy%2520coffee.%2520The%2520left%2520side%2520has%2520a%2520clean%2520light%2520beige%2520background%2520that%2520transitions%2520naturally%2520to%2520the%2520cafe%2520scene%2520on%2520the%2520right.%2520The%2520image%2520has%2520warm%2520lighting%2520and%2520a%2520welcoming%2520atmosphere&width=1920&height=1080&seq=1&orientation=landscape');
+          background-size: cover;
+          background-position: center;
+        "
+        class="absolute inset-0"
+      ></div>
+      <div
+        class="absolute inset-0 bg-gradient-to-r from-[#F5E9E2] via-[#F5E9E2]/90 to-transparent"
+      ></div>
+      <div class="container relative mx-auto px-4 h-full flex items-center">
+        <div class="w-full md:w-1/2 text-left">
+          <h1
+            class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight"
+          >
+            Relaks przy kawie w towarzystwie naszych kotów
+          </h1>
+          <p class="text-xl mb-8">
+            Rezerwuj wizytę online i odbierz 10% zniżki na pierwszą kawę
+          </p>
+          <a
+            href="#rezerwacja"
+            class="bg-primary text-white px-8 py-4 rounded-button text-lg font-bold inline-block shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1 whitespace-nowrap"
+            >Zarezerwuj stolik</a
+          >
+        </div>
+      </div>
+    </section>
+    <!-- O nas Section -->
+    <section id="o-nas" class="py-16 bg-white">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">
+          O naszej kawiarni
+        </h2>
+        <div class="flex flex-col md:flex-row gap-8 items-center">
+          <div class="w-full md:w-1/2">
+            <img
+              src="https://readdy.ai/api/search-image?query=cozy%2520interior%2520of%2520a%2520cat%2520cafe%2520with%2520comfortable%2520seating%2520wooden%2520furniture%2520and%2520several%2520cats%2520lounging%2520around%2520plants%2520and%2520cat%2520trees%2520warm%2520lighting%2520and%2520a%2520relaxed%2520atmosphere&width=600&height=400&seq=2&orientation=landscape"
+              alt="Wnętrze Kociej Kawiarni"
+              class="rounded-lg shadow-lg w-full h-auto object-cover"
+            />
+          </div>
+          <div class="w-full md:w-1/2">
+            <h3 class="text-2xl font-bold mb-4">
+              Miejsce, gdzie koty i ludzie czują się jak w domu
+            </h3>
+            <p class="mb-4">
+              Nasza Kocia Kawiarnia to wyjątkowe miejsce, gdzie możesz cieszyć
+              się doskonałą kawą i pysznymi deserami w towarzystwie przyjaznych
+              kotów. Stworzyliśmy przestrzeń, która jest zarówno komfortowa dla
+              naszych mruczących przyjaciół, jak i przytulna dla gości.
+            </p>
+            <p class="mb-4">
+              Wszystkie nasze koty pochodzą z lokalnych schronisk lub
+              certyfikowanych hodowli. Niektóre z nich są dostępne do adopcji
+              dla odpowiedzialnych opiekunów.
+            </p>
+            <p>
+              Zapewniamy kotom najlepszą opiekę, regularne wizyty u weterynarza
+              i zbilansowaną dietę. Dla naszych gości przygotowujemy kawę z
+              najlepszych ziaren oraz domowe wypieki.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Koty Section -->
+    <section id="koty" class="py-16 bg-[#F5E9E2]">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">
+          Poznaj nasze koty
+        </h2>
+        <p class="text-center mb-12 max-w-2xl mx-auto">
+          Każdy z naszych kocich przyjaciół ma wyjątkową osobowość. Niektóre
+          uwielbiają być w centrum uwagi, inne wolą obserwować z dystansu.
+          Wszystkie czekają, by się z Tobą zaprzyjaźnić!
+        </p>
+        <div class="relative">
+          <div
+            class="flex overflow-x-auto pb-8 gap-6 snap-x"
+            id="cats-carousel"
+          >
+            <!-- Kot 1 -->
+            <div
+              class="min-w-[280px] max-w-[280px] bg-white rounded-lg shadow-lg overflow-hidden snap-start transition-transform duration-300 menu-item"
+            >
+              <img
+                src="https://readdy.ai/api/search-image?query=adorable%2520grey%2520british%2520shorthair%2520cat%2520with%2520bright%2520yellow%2520eyes%2520sitting%2520on%2520a%2520cat%2520tree%2520in%2520a%2520cafe%2520setting%2520with%2520soft%2520natural%2520lighting%2520and%2520a%2520clean%2520background&width=300&height=300&seq=3&orientation=squarish"
+                alt="Kot Mruczek w kawiarni"
+                class="w-full h-48 object-cover object-top"
+              />
+              <div class="p-4">
+                <div class="flex justify-between items-center mb-2">
+                  <h3 class="text-xl font-bold">Mruczek</h3>
+                  <span class="text-sm">2 lata</span>
+                </div>
+                <p class="text-sm mb-3">
+                  Przyjazny brytyjczyk, uwielbia drapanie za uchem i wylegiwanie
+                  się na parapetach.
+                </p>
+                <div class="flex justify-between items-center">
+                  <span
+                    class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full"
+                    >Do adopcji</span
+                  >
+                  <button class="text-primary hover:text-secondary">
+                    <i class="ri-heart-line ri-lg"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- Kot 2 -->
+            <div
+              class="min-w-[280px] max-w-[280px] bg-white rounded-lg shadow-lg overflow-hidden snap-start transition-transform duration-300 menu-item"
+            >
+              <img
+                src="https://readdy.ai/api/search-image?query=beautiful%2520orange%2520tabby%2520cat%2520lounging%2520on%2520a%2520cushion%2520in%2520a%2520cafe%2520setting%2520with%2520soft%2520natural%2520lighting%2520and%2520a%2520clean%2520background%2520the%2520cat%2520has%2520green%2520eyes%2520and%2520looks%2520relaxed&width=300&height=300&seq=4&orientation=squarish"
+                alt="Kot Rudzik w kawiarni"
+                class="w-full h-48 object-cover object-top"
+              />
+              <div class="p-4">
+                <div class="flex justify-between items-center mb-2">
+                  <h3 class="text-xl font-bold">Rudzik</h3>
+                  <span class="text-sm">3 lata</span>
+                </div>
+                <p class="text-sm mb-3">
+                  Energiczny rudy kot, który uwielbia zabawę i jest bardzo
+                  towarzyski. Zawsze pierwszy wita gości.
+                </p>
+                <div class="flex justify-between items-center">
+                  <span
+                    class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded-full"
+                    >Rezydent</span
+                  >
+                  <button class="text-primary hover:text-secondary">
+                    <i class="ri-heart-line ri-lg"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- Kot 3 -->
+            <div
+              class="min-w-[280px] max-w-[280px] bg-white rounded-lg shadow-lg overflow-hidden snap-start transition-transform duration-300 menu-item"
+            >
+              <img
+                src="https://readdy.ai/api/search-image?query=elegant%2520black%2520cat%2520with%2520yellow%2520eyes%2520sitting%2520on%2520a%2520window%2520sill%2520in%2520a%2520cafe%2520setting%2520with%2520soft%2520natural%2520lighting%2520and%2520a%2520clean%2520background%2520the%2520cat%2520looks%2520mysterious%2520and%2520regal&width=300&height=300&seq=5&orientation=squarish"
+                alt="Kot Luna w kawiarni"
+                class="w-full h-48 object-cover object-top"
+              />
+              <div class="p-4">
+                <div class="flex justify-between items-center mb-2">
+                  <h3 class="text-xl font-bold">Luna</h3>
+                  <span class="text-sm">4 lata</span>
+                </div>
+                <p class="text-sm mb-3">
+                  Tajemnicza czarna kotka, która uwielbia obserwować gości z
+                  wysokości. Lubi spokój i ciszę.
+                </p>
+                <div class="flex justify-between items-center">
+                  <span
+                    class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full"
+                    >Do adopcji</span
+                  >
+                  <button class="text-primary hover:text-secondary">
+                    <i class="ri-heart-line ri-lg"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- Kot 4 -->
+            <div
+              class="min-w-[280px] max-w-[280px] bg-white rounded-lg shadow-lg overflow-hidden snap-start transition-transform duration-300 menu-item"
+            >
+              <img
+                src="https://readdy.ai/api/search-image?query=fluffy%2520ragdoll%2520cat%2520with%2520blue%2520eyes%2520lounging%2520on%2520a%2520cat%2520bed%2520in%2520a%2520cafe%2520setting%2520with%2520soft%2520natural%2520lighting%2520and%2520a%2520clean%2520background%2520the%2520cat%2520looks%2520relaxed%2520and%2520friendly&width=300&height=300&seq=6&orientation=squarish"
+                alt="Kot Puszek w kawiarni"
+                class="w-full h-48 object-cover object-top"
+              />
+              <div class="p-4">
+                <div class="flex justify-between items-center mb-2">
+                  <h3 class="text-xl font-bold">Puszek</h3>
+                  <span class="text-sm">1 rok</span>
+                </div>
+                <p class="text-sm mb-3">
+                  Puchaty ragdoll, który uwielbia być noszony na rękach. Bardzo
+                  przyjazny i cierpliwy.
+                </p>
+                <div class="flex justify-between items-center">
+                  <span
+                    class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded-full"
+                    >Rezydent</span
+                  >
+                  <button class="text-primary hover:text-secondary">
+                    <i class="ri-heart-line ri-lg"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- Kot 5 -->
+            <div
+              class="min-w-[280px] max-w-[280px] bg-white rounded-lg shadow-lg overflow-hidden snap-start transition-transform duration-300 menu-item"
+            >
+              <img
+                src="https://readdy.ai/api/search-image?query=calico%2520cat%2520with%2520orange%2520black%2520and%2520white%2520patches%2520playing%2520with%2520a%2520toy%2520in%2520a%2520cafe%2520setting%2520with%2520soft%2520natural%2520lighting%2520and%2520a%2520clean%2520background%2520the%2520cat%2520looks%2520playful%2520and%2520energetic&width=300&height=300&seq=7&orientation=squarish"
+                alt="Kot Łatka w kawiarni"
+                class="w-full h-48 object-cover object-top"
+              />
+              <div class="p-4">
+                <div class="flex justify-between items-center mb-2">
+                  <h3 class="text-xl font-bold">Łatka</h3>
+                  <span class="text-sm">2 lata</span>
+                </div>
+                <p class="text-sm mb-3">
+                  Energiczna kotka tricolor, która uwielbia zabawki i gonienie
+                  piłeczek. Zawsze w ruchu!
+                </p>
+                <div class="flex justify-between items-center">
+                  <span
+                    class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full"
+                    >Do adopcji</span
+                  >
+                  <button class="text-primary hover:text-secondary">
+                    <i class="ri-heart-line ri-lg"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Navigation Buttons -->
+          <button
+            class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white rounded-full shadow-lg p-2 -ml-4 hidden md:block"
+            id="prev-cat"
+          >
+            <i class="ri-arrow-left-s-line ri-lg"></i>
+          </button>
+          <button
+            class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white rounded-full shadow-lg p-2 -mr-4 hidden md:block"
+            id="next-cat"
+          >
+            <i class="ri-arrow-right-s-line ri-lg"></i>
+          </button>
+        </div>
+        <div class="text-center mt-8">
+          <a
+            href="#wszystkie-koty"
+            class="inline-block bg-white text-primary border border-primary px-6 py-3 rounded-button font-bold hover:bg-primary hover:text-white transition-colors whitespace-nowrap"
+            >Poznaj wszystkie koty</a
+          >
+        </div>
+      </div>
+    </section>
+    <!-- Menu Section -->
+    <section id="menu" class="py-16 bg-white">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">
+          Nasze menu
+        </h2>
+        <p class="text-center mb-8 max-w-2xl mx-auto">
+          Oferujemy szeroki wybór kaw, herbat i domowych wypieków. Wszystkie
+          nasze produkty przygotowujemy z najwyższej jakości składników.
+        </p>
+        <!-- Search Bar -->
+        <div class="max-w-md mx-auto mb-8">
+          <div class="relative">
+            <div
+              class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
+            >
+              <i class="ri-search-line ri-lg text-gray-400"></i>
+            </div>
+            <input
+              type="text"
+              id="menu-search"
+              class="w-full p-4 pl-10 text-sm border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
+              placeholder="Szukaj w menu..."
+            />
+          </div>
+        </div>
+        <!-- Menu Tabs -->
+        <div class="flex justify-center mb-8">
+          <div class="inline-flex p-1 rounded-full bg-gray-100">
+            <button
+              class="tab-button active px-6 py-2 rounded-full text-sm font-medium whitespace-nowrap"
+              data-tab="napoje"
+            >
+              Napoje
+            </button>
+            <button
+              class="tab-button px-6 py-2 rounded-full text-sm font-medium whitespace-nowrap"
+              data-tab="desery"
+            >
+              Desery
+            </button>
+            <button
+              class="tab-button px-6 py-2 rounded-full text-sm font-medium whitespace-nowrap"
+              data-tab="promocje"
+            >
+              Promocje
+            </button>
+          </div>
+        </div>
+        <!-- Menu Content -->
+        <div class="tab-content" id="napoje">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Menu Item 1 -->
+            <div
+              class="bg-white rounded-lg shadow p-6 transition-transform duration-300 menu-item"
+            >
+              <div class="flex justify-between items-start mb-3">
+                <h3 class="text-xl font-bold">Kocie Latte</h3>
+                <span class="text-lg font-bold text-primary">15 zł</span>
+              </div>
+              <p class="text-sm mb-3">
+                Espresso, spienione mleko, syrop waniliowy, posypka w kształcie
+                kota
+              </p>
+              <div class="flex space-x-2">
+                <span class="bg-gray-100 text-xs px-2 py-1 rounded-full"
+                  >Mleko</span
+                >
+                <span class="bg-gray-100 text-xs px-2 py-1 rounded-full"
+                  >Gluten</span
+                >
+              </div>
+            </div>
+            <!-- Menu Item 2 -->
+            <div
+              class="bg-white rounded-lg shadow p-6 transition-transform duration-300 menu-item"
+            >
+              <div class="flex justify-between items-start mb-3">
+                <h3 class="text-xl font-bold">Cappuccino Mruczka</h3>
+                <span class="text-lg font-bold text-primary">14 zł</span>
+              </div>
+              <p class="text-sm mb-3">
+                Podwójne espresso, aksamitna pianka mleczna, cynamon
+              </p>
+              <div class="flex space-x-2">
+                <span class="bg-gray-100 text-xs px-2 py-1 rounded-full"
+                  >Mleko</span
+                >
+              </div>
+            </div>
+            <!-- Menu Item 3 -->
+            <div
+              class="bg-white rounded-lg shadow p-6 transition-transform duration-300 menu-item"
+            >
+              <div class="flex justify-between items-start mb-3">
+                <h3 class="text-xl font-bold">Herbata Kocimiętka</h3>
+                <span class="text-lg font-bold text-primary">12 zł</span>
+              </div>
+              <p class="text-sm mb-3">
+                Aromatyczna herbata ziołowa z dodatkiem miodu i cytryny
+              </p>
+              <div class="flex space-x-2">
+                <span class="bg-gray-100 text-xs px-2 py-1 rounded-full"
+                  >Miód</span
+                >
+              </div>
+            </div>
+            <!-- Menu Item 4 -->
+            <div
+              class="bg-white rounded-lg shadow p-6 transition-transform duration-300 menu-item"
+            >
+              <div class="flex justify-between items-start mb-3">
+                <h3 class="text-xl font-bold">Mrożona Kawa Perska</h3>
+                <span class="text-lg font-bold text-primary">16 zł</span>
+              </div>
+              <p class="text-sm mb-3">
+                Kawa cold brew, mleko, syrop karmelowy, lód
+              </p>
+              <div class="flex space-x-2">
+                <span class="bg-gray-100 text-xs px-2 py-1 rounded-full"
+                  >Mleko</span
+                >
+              </div>
+            </div>
+            <!-- Menu Item 5 -->
+            <div
+              class="bg-white rounded-lg shadow p-6 transition-transform duration-300 menu-item"
+            >
+              <div class="flex justify-between items-start mb-3">
+                <h3 class="text-xl font-bold">Gorąca Czekolada Puszka</h3>
+                <span class="text-lg font-bold text-primary">18 zł</span>
+              </div>
+              <p class="text-sm mb-3">
+                Gęsta belgijska czekolada, bita śmietana, posypka czekoladowa
+              </p>
+              <div class="flex space-x-2">
+                <span class="bg-gray-100 text-xs px-2 py-1 rounded-full"
+                  >Mleko</span
+                >
+                <span class="bg-gray-100 text-xs px-2 py-1 rounded-full"
+                  >Śmietana</span
+                >
+              </div>
+            </div>
+            <!-- Menu Item 6 -->
+            <div
+              class="bg-white rounded-lg shadow p-6 transition-transform duration-300 menu-item"
+            >
+              <div class="flex justify-between items-start mb-3">
+                <h3 class="text-xl font-bold">Matcha Łapka</h3>
+                <span class="text-lg font-bold text-primary">17 zł</span>
+              </div>
+              <p class="text-sm mb-3">
+                Ceremonialnej jakości matcha, spienione mleko, miód
+              </p>
+              <div class="flex space-x-2">
+                <span class="bg-gray-100 text-xs px-2 py-1 rounded-full"
+                  >Mleko</span
+                >
+                <span class="bg-gray-100 text-xs px-2 py-1 rounded-full"
+                  >Miód</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-content hidden" id="desery">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Deser 1 -->
+            <div
+              class="bg-white rounded-lg shadow p-6 transition-transform duration-300 menu-item"
+            >
+              <div class="flex justify-between items-start mb-3">
+                <h3 class="text-xl font-bold">Sernik Koci Pyszczek</h3>
+                <span class="text-lg font-bold text-primary">18 zł</span>
+              </div>
+              <p class="text-sm mb-3">
+                Kremowy sernik na kruchym spodzie z polewą malinową
+              </p>
+              <div class="flex space-x-2">
+                <span class="bg-gray-100 text-xs px-2 py-1 rounded-full"
+                  >Gluten</span
+                >
+                <span class="bg-gray-100 text-xs px-2 py-1 rounded-full"
+                  >Nabiał</span
+                >
+                <span class="bg-gray-100 text-xs px-2 py-1 rounded-full"
+                  >Jaja</span
+                >
+              </div>
+            </div>
+            <!-- Deser 2 -->
+            <div
+              class="bg-white rounded-lg shadow p-6 transition-transform duration-300 menu-item"
+            >
+              <div class="flex justify-between items-start mb-3">
+                <h3 class="text-xl font-bold">Muffin Kociego Pazurka</h3>
+                <span class="text-lg font-bold text-primary">12 zł</span>
+              </div>
+              <p class="text-sm mb-3">
+                Czekoladowy muffin z nadzieniem karmelowym i posypką orzechową
+              </p>
+              <div class="flex space-x-2">
+                <span class="bg-gray-100 text-xs px-2 py-1 rounded-full"
+                  >Gluten</span
+                >
+                <span class="bg-gray-100 text-xs px-2 py-1 rounded-full"
+                  >Jaja</span
+                >
+                <span class="bg-gray-100 text-xs px-2 py-1 rounded-full"
+                  >Orzechy</span
+                >
+              </div>
+            </div>
+            <!-- Deser 3 -->
+            <div
+              class="bg-white rounded-lg shadow p-6 transition-transform duration-300 menu-item"
+            >
+              <div class="flex justify-between items-start mb-3">
+                <h3 class="text-xl font-bold">Tiramisu Mruczka</h3>
+                <span class="text-lg font-bold text-primary">16 zł</span>
+              </div>
+              <p class="text-sm mb-3">
+                Klasyczne włoskie tiramisu z dodatkiem kawy espresso i kakao
+              </p>
+              <div class="flex space-x-2">
+                <span class="bg-gray-100 text-xs px-2 py-1 rounded-full"
+                  >Gluten</span
+                >
+                <span class="bg-gray-100 text-xs px-2 py-1 rounded-full"
+                  >Nabiał</span
+                >
+                <span class="bg-gray-100 text-xs px-2 py-1 rounded-full"
+                  >Jaja</span
+                >
+                <span class="bg-gray-100 text-xs px-2 py-1 rounded-full"
+                  >Alkohol</span
+                >
+              </div>
+            </div>
+            <!-- Deser 4 -->
+            <div
+              class="bg-white rounded-lg shadow p-6 transition-transform duration-300 menu-item"
+            >
+              <div class="flex justify-between items-start mb-3">
+                <h3 class="text-xl font-bold">Ciasteczka Kocie Łapki</h3>
+                <span class="text-lg font-bold text-primary">10 zł</span>
+              </div>
+              <p class="text-sm mb-3">
+                Kruche ciasteczka w kształcie kocich łapek z czekoladą
+              </p>
+              <div class="flex space-x-2">
+                <span class="bg-gray-100 text-xs px-2 py-1 rounded-full"
+                  >Gluten</span
+                >
+                <span class="bg-gray-100 text-xs px-2 py-1 rounded-full"
+                  >Jaja</span
+                >
+              </div>
+            </div>
+            <!-- Deser 5 -->
+            <div
+              class="bg-white rounded-lg shadow p-6 transition-transform duration-300 menu-item"
+            >
+              <div class="flex justify-between items-start mb-3">
+                <h3 class="text-xl font-bold">Tarta Kocia Uczta</h3>
+                <span class="text-lg font-bold text-primary">15 zł</span>
+              </div>
+              <p class="text-sm mb-3">
+                Tarta z owocami sezonowymi na kruchym spodzie
+              </p>
+              <div class="flex space-x-2">
+                <span class="bg-gray-100 text-xs px-2 py-1 rounded-full"
+                  >Gluten</span
+                >
+                <span class="bg-gray-100 text-xs px-2 py-1 rounded-full"
+                  >Nabiał</span
+                >
+                <span class="bg-gray-100 text-xs px-2 py-1 rounded-full"
+                  >Jaja</span
+                >
+              </div>
+            </div>
+            <!-- Deser 6 -->
+            <div
+              class="bg-white rounded-lg shadow p-6 transition-transform duration-300 menu-item"
+            >
+              <div class="flex justify-between items-start mb-3">
+                <h3 class="text-xl font-bold">Lody Kociego Mruczenia</h3>
+                <span class="text-lg font-bold text-primary">14 zł</span>
+              </div>
+              <p class="text-sm mb-3">
+                Domowe lody waniliowe z sosem karmelowym i prażonymi orzechami
+              </p>
+              <div class="flex space-x-2">
+                <span class="bg-gray-100 text-xs px-2 py-1 rounded-full"
+                  >Nabiał</span
+                >
+                <span class="bg-gray-100 text-xs px-2 py-1 rounded-full"
+                  >Jaja</span
+                >
+                <span class="bg-gray-100 text-xs px-2 py-1 rounded-full"
+                  >Orzechy</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-content hidden" id="promocje">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Promocja 1 -->
+            <div
+              class="bg-white rounded-lg shadow p-6 transition-transform duration-300 menu-item border-2 border-primary"
+            >
+              <div class="flex justify-between items-start mb-3">
+                <h3 class="text-xl font-bold">Zestaw Koci Mruczek</h3>
+                <div>
+                  <span class="line-through text-gray-400">35 zł</span>
+                  <span class="text-lg font-bold text-primary ml-2">28 zł</span>
+                </div>
+              </div>
+              <p class="text-sm mb-3">
+                Dowolna kawa + sernik lub muffin. Oszczędzasz 20%!
+              </p>
+              <div class="flex space-x-2">
+                <span
+                  class="bg-primary bg-opacity-10 text-primary text-xs px-2 py-1 rounded-full"
+                  >Promocja</span
+                >
+              </div>
+            </div>
+            <!-- Promocja 2 -->
+            <div
+              class="bg-white rounded-lg shadow p-6 transition-transform duration-300 menu-item border-2 border-primary"
+            >
+              <div class="flex justify-between items-start mb-3">
+                <h3 class="text-xl font-bold">Happy Hours Kocie Łapki</h3>
+                <span class="text-lg font-bold text-primary">-30%</span>
+              </div>
+              <p class="text-sm mb-3">
+                Wszystkie kawy 30% taniej od poniedziałku do piątku między 14:00
+                a 16:00
+              </p>
+              <div class="flex space-x-2">
+                <span
+                  class="bg-primary bg-opacity-10 text-primary text-xs px-2 py-1 rounded-full"
+                  >Promocja</span
+                >
+              </div>
+            </div>
+            <!-- Promocja 3 -->
+            <div
+              class="bg-white rounded-lg shadow p-6 transition-transform duration-300 menu-item border-2 border-primary"
+            >
+              <div class="flex justify-between items-start mb-3">
+                <h3 class="text-xl font-bold">Kocia Niedziela</h3>
+                <span class="text-lg font-bold text-primary">2+1</span>
+              </div>
+              <p class="text-sm mb-3">
+                W każdą niedzielę przy zamówieniu dwóch deserów, trzeci
+                otrzymasz gratis!
+              </p>
+              <div class="flex space-x-2">
+                <span
+                  class="bg-primary bg-opacity-10 text-primary text-xs px-2 py-1 rounded-full"
+                  >Promocja</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="text-center mt-10">
+          <a
+            href="#pobierz-menu"
+            class="inline-block bg-white text-primary border border-primary px-6 py-3 rounded-button font-bold hover:bg-primary hover:text-white transition-colors whitespace-nowrap"
+          >
+            <i class="ri-download-line mr-2"></i>Pobierz pełne menu (PDF)
+          </a>
+        </div>
+      </div>
+    </section>
+    <!-- Why Us Section -->
+    <section class="py-16 bg-[#F5E9E2]">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">
+          Dlaczego warto nas odwiedzić?
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Feature 1 -->
+          <div class="bg-white rounded-lg shadow-lg p-6 text-center">
+            <div
+              class="w-16 h-16 flex items-center justify-center mx-auto mb-4 bg-primary bg-opacity-10 rounded-full"
+            >
+              <i class="ri-cup-line ri-2x text-primary"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-3">Kawy z najlepszych ziaren</h3>
+            <p>
+              Nasze kawy przygotowujemy z najwyższej jakości ziaren, które
+              sprowadzamy od sprawdzonych dostawców. Każdy łyk to prawdziwa
+              przyjemność.
+            </p>
+          </div>
+          <!-- Feature 2 -->
+          <div class="bg-white rounded-lg shadow-lg p-6 text-center">
+            <div
+              class="w-16 h-16 flex items-center justify-center mx-auto mb-4 bg-primary bg-opacity-10 rounded-full"
+            >
+              <i class="ri-heart-line ri-2x text-primary"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-3">
+              Koty z certyfikowanej hodowli
+            </h3>
+            <p>
+              Wszystkie nasze koty pochodzą z certyfikowanych hodowli lub
+              schronisk. Zapewniamy im najlepszą opiekę i regularne wizyty u
+              weterynarza.
+            </p>
+          </div>
+          <!-- Feature 3 -->
+          <div class="bg-white rounded-lg shadow-lg p-6 text-center">
+            <div
+              class="w-16 h-16 flex items-center justify-center mx-auto mb-4 bg-primary bg-opacity-10 rounded-full"
+            >
+              <i class="ri-wifi-line ri-2x text-primary"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-3">Bezpłatne WiFi</h3>
+            <p>
+              Dla naszych gości oferujemy szybkie i bezpłatne WiFi. Możesz
+              pracować, uczyć się lub po prostu przeglądać internet w
+              towarzystwie kotów.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Location Section -->
+    <section id="kontakt" class="py-16 bg-white">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">
+          Gdzie nas znaleźć
+        </h2>
+        <div class="flex flex-col md:flex-row gap-8">
+          <div class="w-full md:w-1/3">
+            <div class="bg-[#F5E9E2] rounded-lg shadow-lg p-6">
+              <h3 class="text-xl font-bold mb-4">Adres i godziny otwarcia</h3>
+              <div class="mb-4">
+                <p class="font-bold">Kocia Kawiarnia</p>
+                <p>ul. Kocia 15</p>
+                <p>00-001 Warszawa</p>
+                <a href="tel:+48123456789" class="text-primary hover:underline"
+                  >+48 123 456 789</a
+                >
+              </div>
+              <div class="mb-4">
+                <p class="font-bold mb-2">Godziny otwarcia:</p>
+                <div class="flex justify-between">
+                  <p>Poniedziałek - Piątek</p>
+                  <p>10:00 - 20:00</p>
+                </div>
+                <div class="flex justify-between">
+                  <p>Sobota - Niedziela</p>
+                  <p>11:00 - 21:00</p>
+                </div>
+              </div>
+              <div>
+                <p class="font-bold mb-2">Informacje o parkingu:</p>
+                <p>
+                  Bezpłatny parking dla gości znajduje się za budynkiem. Wjazd
+                  od ul. Mysiej.
+                </p>
+              </div>
+            </div>
+            <div class="mt-8">
+              <h3 class="text-xl font-bold mb-4">Opinie naszych gości</h3>
+              <div class="bg-[#F5E9E2] rounded-lg shadow-lg p-6 mb-4">
+                <div class="flex items-center mb-2">
+                  <div class="flex text-yellow-400">
+                    <i class="ri-star-fill"></i>
+                    <i class="ri-star-fill"></i>
+                    <i class="ri-star-fill"></i>
+                    <i class="ri-star-fill"></i>
+                    <i class="ri-star-fill"></i>
+                  </div>
+                  <span class="ml-2 font-bold">Aleksandra Nowak</span>
+                </div>
+                <p class="text-sm">
+                  Cudowne miejsce! Kawa pyszna, koty przesympatyczne, a obsługa
+                  bardzo miła. Idealne miejsce na relaks po pracy.
+                </p>
+              </div>
+              <div class="bg-[#F5E9E2] rounded-lg shadow-lg p-6 mb-4">
+                <div class="flex items-center mb-2">
+                  <div class="flex text-yellow-400">
+                    <i class="ri-star-fill"></i>
+                    <i class="ri-star-fill"></i>
+                    <i class="ri-star-fill"></i>
+                    <i class="ri-star-fill"></i>
+                    <i class="ri-star-half-fill"></i>
+                  </div>
+                  <span class="ml-2 font-bold">Piotr Kowalski</span>
+                </div>
+                <p class="text-sm">
+                  Sernik jest absolutnie niebiański! A koty to prawdziwe gwiazdy
+                  tego miejsca. Polecam każdemu miłośnikowi kotów.
+                </p>
+              </div>
+              <div class="bg-[#F5E9E2] rounded-lg shadow-lg p-6">
+                <div class="flex items-center mb-2">
+                  <div class="flex text-yellow-400">
+                    <i class="ri-star-fill"></i>
+                    <i class="ri-star-fill"></i>
+                    <i class="ri-star-fill"></i>
+                    <i class="ri-star-fill"></i>
+                    <i class="ri-star-fill"></i>
+                  </div>
+                  <span class="ml-2 font-bold">Magdalena Wiśniewska</span>
+                </div>
+                <p class="text-sm">
+                  Przytulne miejsce z niesamowitą atmosferą. Koty są zadbane i
+                  przyjazne. Cappuccino Mruczka to mój nowy ulubieniec!
+                </p>
+              </div>
+              <div class="text-center mt-4">
+                <a
+                  href="#dodaj-opinie"
+                  class="inline-block bg-white text-primary border border-primary px-6 py-3 rounded-button font-bold hover:bg-primary hover:text-white transition-colors whitespace-nowrap"
+                >
+                  <i class="ri-edit-line mr-2"></i>Dodaj opinię
+                </a>
+              </div>
+            </div>
+          </div>
+          <div
+            class="w-full md:w-2/3 h-[600px] rounded-lg overflow-hidden shadow-lg"
+          >
+            <div
+              style="
+                background-image: url('https://public.readdy.ai/gen_page/map_placeholder_1280x720.png');
+                background-size: cover;
+                background-position: center;
+              "
+              class="w-full h-full"
+            ></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Reservation Section -->
+    <section id="rezerwacja" class="py-16 bg-primary bg-opacity-10">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">
+          Zarezerwuj stolik
+        </h2>
+        <p class="text-center mb-12 max-w-2xl mx-auto">
+          Zarezerwuj stolik online i otrzymaj 10% zniżki na pierwszą kawę.
+          Rezerwacja jest ważna przez 15 minut od wybranej godziny.
+        </p>
+        <div class="max-w-2xl mx-auto bg-white rounded-lg shadow-lg p-8">
+          <form>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+              <div>
+                <label for="name" class="block mb-2 font-medium"
+                  >Imię i nazwisko</label
+                >
+                <input
+                  type="text"
+                  id="name"
+                  class="w-full p-3 border border-gray-200 rounded focus:ring-2 focus:ring-primary focus:border-primary"
+                  required
+                />
+              </div>
+              <div>
+                <label for="email" class="block mb-2 font-medium">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  class="w-full p-3 border border-gray-200 rounded focus:ring-2 focus:ring-primary focus:border-primary"
+                  required
+                />
+              </div>
+              <div>
+                <label for="phone" class="block mb-2 font-medium"
+                  >Telefon</label
+                >
+                <input
+                  type="tel"
+                  id="phone"
+                  class="w-full p-3 border border-gray-200 rounded focus:ring-2 focus:ring-primary focus:border-primary"
+                  required
+                />
+              </div>
+              <div>
+                <label for="guests" class="block mb-2 font-medium"
+                  >Liczba osób</label
+                >
+                <input
+                  type="number"
+                  id="guests"
+                  min="1"
+                  max="10"
+                  class="w-full p-3 border border-gray-200 rounded focus:ring-2 focus:ring-primary focus:border-primary"
+                  required
+                />
+              </div>
+              <div>
+                <label for="date" class="block mb-2 font-medium">Data</label>
+                <input
+                  type="date"
+                  id="date"
+                  class="w-full p-3 border border-gray-200 rounded focus:ring-2 focus:ring-primary focus:border-primary"
+                  required
+                />
+              </div>
+              <div>
+                <label for="time" class="block mb-2 font-medium">Godzina</label>
+                <input
+                  type="time"
+                  id="time"
+                  class="w-full p-3 border border-gray-200 rounded focus:ring-2 focus:ring-primary focus:border-primary"
+                  required
+                />
+              </div>
+            </div>
+            <div class="mb-6">
+              <label for="message" class="block mb-2 font-medium"
+                >Dodatkowe informacje</label
+              >
+              <textarea
+                id="message"
+                rows="4"
+                class="w-full p-3 border border-gray-200 rounded focus:ring-2 focus:ring-primary focus:border-primary"
+              ></textarea>
+            </div>
+            <div class="mb-6">
+              <label class="flex items-center">
+                <input type="checkbox" class="mr-2" required />
+                <span class="text-sm"
+                  >Akceptuję
+                  <a href="#regulamin" class="text-primary hover:underline"
+                    >regulamin</a
+                  >
+                  i wyrażam zgodę na przetwarzanie moich danych osobowych</span
+                >
+              </label>
+            </div>
+            <div class="text-center">
+              <button
+                type="submit"
+                class="bg-primary text-white px-8 py-4 rounded-button text-lg font-bold shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1 whitespace-nowrap"
+              >
+                Zarezerwuj stolik
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+    <!-- Newsletter Section -->
+    <section class="py-16 bg-white">
+      <div class="container mx-auto px-4">
+        <div class="max-w-3xl mx-auto text-center">
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">
+            Dołącz do naszego newslettera
+          </h2>
+          <p class="mb-8">
+            Zapisz się, aby otrzymywać informacje o promocjach, nowych kotach i
+            wydarzeniach w naszej kawiarni.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+            <input
+              type="email"
+              placeholder="Twój adres email"
+              class="flex-grow p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
+            />
+            <button
+              class="bg-primary text-white px-6 py-3 rounded-button font-bold shadow-lg hover:shadow-xl transition-all whitespace-nowrap"
+            >
+              Zapisz się
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Footer -->
+    <footer class="bg-[#6D6875] text-white py-12">
+      <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div>
+            <a
+              href="#"
+              class="font-['Pacifico'] text-3xl text-white mb-4 inline-block"
+              >Kocia Kawiarnia</a
+            >
+            <p class="mb-4">
+              Miejsce, gdzie koty i ludzie czują się jak w domu.
+            </p>
+            <div class="flex space-x-4">
+              <a
+                href="#"
+                class="w-10 h-10 flex items-center justify-center bg-white bg-opacity-20 rounded-full hover:bg-opacity-30 transition-colors"
+              >
+                <i class="ri-facebook-fill ri-lg"></i>
+              </a>
+              <a
+                href="#"
+                class="w-10 h-10 flex items-center justify-center bg-white bg-opacity-20 rounded-full hover:bg-opacity-30 transition-colors"
+              >
+                <i class="ri-instagram-line ri-lg"></i>
+              </a>
+              <a
+                href="#"
+                class="w-10 h-10 flex items-center justify-center bg-white bg-opacity-20 rounded-full hover:bg-opacity-30 transition-colors"
+              >
+                <i class="ri-twitter-x-line ri-lg"></i>
+              </a>
+            </div>
+          </div>
+          <div>
+            <h3 class="text-xl font-bold mb-4">Kontakt</h3>
+            <p class="mb-2">ul. Kocia 15</p>
+            <p class="mb-2">00-001 Warszawa</p>
+            <p class="mb-2">
+              <a href="tel:+48123456789" class="hover:underline"
+                >+48 123 456 789</a
+              >
+            </p>
+            <p>
+              <a href="mailto:kontakt@kociakawiarnia.pl" class="hover:underline"
+                >kontakt@kociakawiarnia.pl</a
+              >
+            </p>
+          </div>
+          <div>
+            <h3 class="text-xl font-bold mb-4">Godziny otwarcia</h3>
+            <p class="mb-2">Poniedziałek - Piątek: 10:00 - 20:00</p>
+            <p>Sobota - Niedziela: 11:00 - 21:00</p>
+          </div>
+          <div>
+            <h3 class="text-xl font-bold mb-4">Szybkie linki</h3>
+            <ul class="space-y-2">
+              <li><a href="#o-nas" class="hover:underline">O nas</a></li>
+              <li><a href="#koty" class="hover:underline">Koty</a></li>
+              <li><a href="#menu" class="hover:underline">Menu</a></li>
+              <li>
+                <a href="#rezerwacja" class="hover:underline">Rezerwacja</a>
+              </li>
+              <li><a href="#kontakt" class="hover:underline">Kontakt</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="border-t border-white border-opacity-20 mt-8 pt-8">
+          <div class="flex flex-col md:flex-row justify-between items-center">
+            <p>&copy; 2025 Kocia Kawiarnia. Wszelkie prawa zastrzeżone.</p>
+            <div class="flex space-x-4 mt-4 md:mt-0">
+              <a href="#polityka-prywatnosci" class="hover:underline"
+                >Polityka prywatności</a
+              >
+              <a href="#regulamin" class="hover:underline">Regulamin</a>
+              <a href="#cookies" class="hover:underline">Cookies</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- Floating CTA for Mobile -->
+    <div class="fixed bottom-4 right-4 md:hidden z-50">
+      <a
+        href="#rezerwacja"
+        class="bg-primary text-white p-4 rounded-full shadow-lg flex items-center justify-center"
+      >
+        <i class="ri-calendar-check-line ri-lg"></i>
+      </a>
+    </div>
+  </body>
 </html>
